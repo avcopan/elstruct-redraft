@@ -10,7 +10,6 @@ METHOD_LST = (
     par.METHOD.UHF_MP2,
     par.METHOD.ROHF,
     par.METHOD.ROHF_MP2,
-    par.METHOD.ROHF_RMP2,
 )
 
 BASIS_DCT = {
@@ -30,11 +29,10 @@ SCF_METHOD_DCT = {
 
 CORR_METHOD_DCT = {
     par.METHOD.CORR.MP2: 'mp2',
-    par.METHOD.CORR.RMP2: 'rmp2',
 }
 
 
-def fillvalue_dictionary(method, basis):
+def fillvalue_dictionary(method, basis, scf_options, corr_options):
     """ get the template fill values for method and basis set
     """
     assert method in METHOD_LST
@@ -44,9 +42,15 @@ def fillvalue_dictionary(method, basis):
     corr_method_val = (CORR_METHOD_DCT[corr_method]
                        if corr_method is not None else '')
 
+    # make sure we aren't setting corr_options for an SCF job
+    if corr_method_val == '':
+        assert corr_options == ''
+
     fill_dct = {
+        template_keys.BASIS: BASIS_DCT[basis],
         template_keys.SCF_METHOD: SCF_METHOD_DCT[scf_method],
         template_keys.CORR_METHOD: corr_method_val,
-        template_keys.BASIS: BASIS_DCT[basis]
+        template_keys.SCF_OPTIONS: scf_options,
+        template_keys.CORR_OPTIONS: corr_options,
     }
     return fill_dct

@@ -15,12 +15,12 @@ def basis_list():
 
 
 def energy_input_string(method, basis, geom, geom_type, charge, mult,
-                        memory=1, nprocs=1, comment=1, corr_options=None,
-                        scf_options=None):
+                        memory=1, comment='', job_options='', corr_options='',
+                        scf_options=''):
     """ energy input string
     """
 
     raise NotImplementedError(
-        method, basis, geom, geom_type, charge, mult, memory, nprocs, comment,
-        corr_options, scf_options
+        method, basis, geom, geom_type, charge, mult, memory, comment,
+        job_options, corr_options, scf_options
     )

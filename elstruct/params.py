@@ -19,11 +19,11 @@ class METHOD():
         RHF = 'rhf'
         UHF = 'uhf'
         ROHF = 'rohf'
+        LIST = (RHF, UHF, ROHF)
 
     class CORR():
         """ correlation method names """
         MP2 = 'mp2'
-        RMP2 = 'rmp2'
 
     # RHF Methods
     RHF = SCF.RHF
@@ -34,19 +34,30 @@ class METHOD():
     # ROHF Methods
     ROHF = SCF.ROHF
     ROHF_MP2 = '-'.join([SCF.ROHF, CORR.MP2])
-    ROHF_RMP2 = '-'.join([SCF.ROHF, CORR.RMP2])
 
-    @staticmethod
-    def split_name(method_name):
+    @classmethod
+    def split_name(cls, method_name):
         """ split a method name into an scf method and a correlated method
         """
         split = method_name.split('-')
         assert len(split) <= 2
-        scf_method, corr_method = (split if len(split) == 2 else
-                                   (split, None))
+        scf_method = split[0]
+        assert scf_method in cls.SCF.LIST
+        corr_method = split[1] if len(split) == 2 else None
         return scf_method, corr_method
 
 
 class PROGRAM():
     """ Programs to be called """
     PSI4 = 'psi4'
+
+
+class GEOM():
+    """ Geometry types """
+
+    class TYPE():
+        """ Geometry types """
+        CARTESIAN = 'cart'
+        INTERNAL = 'int'
+
+    TYPES = (TYPE.CARTESIAN, TYPE.INTERNAL)

@@ -1,10 +1,13 @@
 """ psi4 writer module """
 import os
+from ... import template
+from . import job
 from . import theory
+from . import molecule
 
 # set the path to the template files
-DIR_PATH = os.path.dirname(os.path.realpath(__file__))
-TEMPLATE_PATH = os.path.join(DIR_PATH, 'templates')
+THIS_DIR = os.path.dirname(os.path.realpath(__file__))
+TEMPLATE_DIR = os.path.join(THIS_DIR, 'templates')
 
 
 def method_list():
@@ -20,14 +23,16 @@ def basis_list():
 
 
 def energy_input_string(method, basis, geom, geom_type, charge, mult,
-                        memory=1, nprocs=1, comment=1, corr_options=None,
-                        scf_options=None):
+                        memory=1, comment='', job_options='', corr_options='',
+                        scf_options=''):
     """ energy input string
     """
     assert method in method_list()
-    theory_fill_dct = theory.fillvalue_dictionary(method, basis)
-    print(theory_fill_dct)
-    print(
-        method, basis, geom, geom_type, charge, mult, memory, nprocs, comment,
-        corr_options, scf_options
-    )
+    fill_dct = {}
+    fill_dct.update(job.fillvalue_dictionary(comment, memory, job_options))
+    fill_dct.update(molecule.fillvalue_dictionary(geom, geom_type, charge,
+                                                  mult))
+    fill_dct.update(theory.fillvalue_dictionary(method, basis, scf_options,
+                                                corr_options))
+    inp_str = template.read_and_fill(TEMPLATE_DIR, 'all.mako', fill_dct)
+    return inp_str
