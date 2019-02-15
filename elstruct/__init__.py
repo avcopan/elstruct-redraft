@@ -1,7 +1,6 @@
 """ electronic structure interfaces """
-from . import writer
-from . import runner
-from . import reader
+from . import write
+from . import read
 
 
-__all__ = ['writer', 'runner', 'reader']
+__all__ = ['write', 'read']

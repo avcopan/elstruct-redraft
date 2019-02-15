@@ -1,4 +1,4 @@
-""" empty functions defining the function signatures for each writer module
+""" empty functions defining the function signatures for each write module
 """
 
 

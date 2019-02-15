@@ -10,13 +10,16 @@ def fillvalue_dictionary(geom, geom_type, charge, mult):
     """
     assert geom_type in par.GEOM.TYPES
 
-    # for now
-    assert geom_type is par.GEOM.TYPE.CARTESIAN
-    geom_str = automol.geom.string(geom)
+    if geom_type == par.GEOM.TYPE.CARTESIAN:
+        geom_str = automol.geom.string(geom)
+        zmat_vals = ''
+    elif geom_type == par.GEOM.TYPE.INTERNAL:
+        geom_str = automol.zmatrix.zmat_string(geom)
+        zmat_vals = ''
 
     fill_dct = {
         template_keys.GEOMETRY: geom_str,
-        template_keys.ZMATRIX_VALUES: '',
+        template_keys.ZMATRIX_VALUES: zmat_vals,
         template_keys.CHARGE: charge,
         template_keys.MULTIPLICITY: mult,
     }
