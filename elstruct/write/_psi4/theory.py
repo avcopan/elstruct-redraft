@@ -1,7 +1,7 @@
 """ theory: method and basis set
 """
 from ... import params as par
-from . import _keys as template_keys
+from . import template_keys
 
 METHOD_LST = (
     par.METHOD.RHF,

@@ -1,6 +1,7 @@
 """ command-line interface for elstruct
 """
 import autocom
+from . import write as _write
 
 
 def main(sysargv):
@@ -8,7 +9,6 @@ def main(sysargv):
     autocom.call_subcommand(
         sysargv, calling_pos=0, subcmd_func_dct={
             'write': write,
-            'run': run,
             'read': read,
         }
     )
@@ -16,12 +16,11 @@ def main(sysargv):
 
 def write(sysargv, calling_pos):
     """ the write subcommand """
-    raise NotImplementedError
-
-
-def run(sysargv, calling_pos):
-    """ the run subcommand """
-    raise NotImplementedError
+    autocom.call_subcommand(
+        sysargv, calling_pos, subcmd_func_dct={
+            'opt': _write.optimization_input_cli,
+        }
+    )
 
 
 def read(sysargv, calling_pos):

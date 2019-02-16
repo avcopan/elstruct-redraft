@@ -52,12 +52,8 @@ class PROGRAM():
     PSI4 = 'psi4'
 
 
-class GEOM():
-    """ Geometry types """
-
-    class TYPE():
-        """ Geometry types """
-        CARTESIAN = 'cart'
-        INTERNAL = 'int'
-
-    TYPES = (TYPE.CARTESIAN, TYPE.INTERNAL)
+class JOB():
+    """ The type of job
+    """
+    ENERGY = 'energy'
+    OPTIMIZATION = 'optimization'

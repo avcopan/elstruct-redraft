@@ -19,6 +19,12 @@ def energy_programs():
         'write', module_template.energy_input_string)
 
 
+def optimization_programs():
+    """ the list of program modules implementing optimization input writers """
+    return pm.program_modules_with_function(
+        'write', module_template.optimization_input_string)
+
+
 def method_list(prog, *args, **kwargs):
     """ _ """
     return pm.call_module_function(
@@ -39,5 +45,13 @@ def energy_input_string(prog, *args, **kwargs):
     """ _ """
     return pm.call_module_function(
         prog, 'write', module_template.energy_input_string,
+        *args, **kwargs
+    )
+
+
+def optimization_input_string(prog, *args, **kwargs):
+    """ _ """
+    return pm.call_module_function(
+        prog, 'write', module_template.optimization_input_string,
         *args, **kwargs
     )
