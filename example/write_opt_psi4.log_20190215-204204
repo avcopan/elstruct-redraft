@@ -1,3 +1,0 @@
-# cmd: es write opt psi4 uhf sto-3g geom.xyz -p
-# exe: /home/avcopan/Documents/repos/auto/elstruct-redraft/es
-('uhf', 'sto-3g', 'geom.xyz')

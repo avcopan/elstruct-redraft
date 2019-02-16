@@ -16,6 +16,7 @@ ${zmat_vals}
 set basis ${basis}
 set scf_type pk
 set reference ${scf_method}
+set mp2_type conv
 
 ${scf_options}
 ${corr_options}

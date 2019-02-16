@@ -1,4 +1,4 @@
-# cmd: es write opt psi4 uhf sto-3g geom.xyz -p
+# cmd: es write opt psi4 rhf-mp2 sto-3g geom.zmat -p
 # exe: /home/avcopan/Documents/repos/auto/elstruct-redraft/es
 Reading in the geometry
 Parsing the geometry comment line for state information

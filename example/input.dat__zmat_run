@@ -21,7 +21,8 @@ d3         = 180.000000
 
 set basis sto-3g
 set scf_type pk
-set reference uhf
+set reference rhf
+set mp2_type conv
 
 
 
